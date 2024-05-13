@@ -1,0 +1,35 @@
+---
+title: "Plotting notes"
+author: "Martine Lind Jensen"
+date: "2024-05-13"
+output: html_document
+---
+
+```{r}
+pacman::p_load(tidyverse, reshape2)
+```
+
+```{r}
+df <- read_csv("Data/ghg-emissions.csv")
+
+melt_df <- melt(df, id = c("unit", "Country/Region", "iso")) %>% 
+  rename(
+    Year = variable
+  ) %>% 
+  mutate(
+    value = as.numeric(value), 
+    Country = as.factor(`Country/Region`), 
+    Year = as.numeric(Year)
+  )
+```
+
+```{r}
+subset1 <- melt_df[grepl("^a", melt_df$Country, ignore.case = TRUE), ]
+
+subset1  %>% ggplot(aes(Year, value, color = `Country/Region`)) + 
+  geom_point() + 
+  #geom_line(aes(color = `Country/Region`))
+  geom_smooth()
+  
+```
+
