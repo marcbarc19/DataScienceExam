@@ -12,6 +12,8 @@ pacman::p_load(tidyverse, reshape2)
 ```{r}
 df <- read_csv("Data/ghg-emissions.csv")
 
+df <- df %>% filter(row_number() <= n()-1)
+
 melt_df <- melt(df, id = c("unit", "Country/Region", "iso")) %>% 
   rename(
     Year = variable
@@ -19,17 +21,24 @@ melt_df <- melt(df, id = c("unit", "Country/Region", "iso")) %>%
   mutate(
     value = as.numeric(value), 
     Country = as.factor(`Country/Region`), 
+    Year = as.character(Year)
+  ) %>%  
+  mutate(
     Year = as.numeric(Year)
   )
 ```
 
 ```{r}
-subset1 <- melt_df[grepl("^a", melt_df$Country, ignore.case = TRUE), ]
+subset1 <- melt_df[grepl("^b", melt_df$Country, ignore.case = TRUE), ]
 
 subset1  %>% ggplot(aes(Year, value, color = `Country/Region`)) + 
   geom_point() + 
   #geom_line(aes(color = `Country/Region`))
   geom_smooth()
   
+```
+
+```{r}
+pop_data <- read_xlsx("Population Data.xlsx", col_names = FALSE)
 ```
 
