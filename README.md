@@ -7,15 +7,14 @@ This repository contains all code and data related to the exam paper: 'Predictiv
 The repository contains: 
 - predictor_cleaning.ipynb, which contains the cleaning of the social and governance readiness indicators
 - git_data folder, that contains the csv files for each data modelling dataset and the cleaned readiness indicators
+- notes folder, that contains irrelevant preliminary notes and codes shared between authors. 
 
 The files that are relevant for the exam paper modelling aspects are: 
 - agricultural_land-modelling.ipynb
 - forest-modelling.ipynb
 - ghg-modelling.ipynb
 
-Above mentioned files all contain data cleaning, data exploration, data splitting, and data modelling, with both MERF's and Linear models.
-
-The notes folder contains irrelevant preliminary notes and codes shared between authors. 
+Above mentioned modelling notebook files all contain data cleaning, data exploration, data splitting, and data modelling, with both MERF's and Linear models.
 
 ## Authors
 - Marc Barcelos (202302260)
