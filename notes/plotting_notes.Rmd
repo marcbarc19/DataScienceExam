@@ -10,7 +10,7 @@ pacman::p_load(tidyverse, reshape2)
 ```
 
 ```{r}
-df <- read_csv("Data/ghg-emissions.csv")
+df <- read_csv("git_data/GHG-modelling.csv")
 
 df <- df %>% filter(row_number() <= n()-1)
 
@@ -29,6 +29,22 @@ melt_df <- melt(df, id = c("unit", "Country/Region", "iso")) %>%
 ```
 
 ```{r}
+ghg <- df
+# Defining the number of years to lag
+lag_years <- 2
+
+# Creating the new column 'lagged_ghg' and initializing with NA
+ghg <- ghg %>%
+  mutate(lagged_ghg = NA_real_)
+
+# Using a left join to find the lagged values and update the 'lagged_ghg' column
+ghg <- ghg %>%
+  left_join(ghg, by = c("Country Code", "Year" + lag_years), suffix = c("", ".lag")) %>%
+  mutate(lagged_ghg = ifelse(is.na(ghg.lag), NA_real_, ghg.lag)) %>%
+  select(-ghg.lag)
+```
+
+```{r}
 subset1 <- melt_df[grepl("^b", melt_df$Country, ignore.case = TRUE), ]
 
 subset1  %>% ggplot(aes(Year, value, color = `Country/Region`)) + 
@@ -40,5 +56,19 @@ subset1  %>% ggplot(aes(Year, value, color = `Country/Region`)) +
 
 ```{r}
 pop_data <- read_xlsx("Population Data.xlsx", col_names = FALSE)
+```
+
+```{r}
+data2 <- read_csv("GHG-modelling.csv")
+```
+
+```{r}
+date <- data %>% rowwise() %>% mutate(
+  y_lagged = 
+)
+
+for (i in rowdata) {
+  
+}
 ```
 
