@@ -1,4 +1,5 @@
 # Predictive Power of Government and Social Readiness on Climate Change Indicators: A Multi-Model Assessment 
+All edits of code, took place before hand-in of exam the 31st of May 2024. 
 
 ## Data Science Exam - Cognitive Science Ms. spring 2024 
 This repository contains all code and data related to the exam paper: 'Predictive Power of Government and Social Readiness on Climate Change Indicators: A Multi-Model Assessment'
